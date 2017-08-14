@@ -1,11 +1,12 @@
 package yechao.dao;
 
+import yechao.model.CustomerVo;
 import yechao.model.customers;
 
 public interface customersDao {
     int deleteByPrimaryKey(Integer id);
 
-    int insert(customers record);
+    int insert(customers customer);
 
     int insertSelective(customers record);
 

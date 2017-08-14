@@ -5,6 +5,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import yechao.dao.customersDao;
+import yechao.model.CustomerVo;
 import yechao.model.customers;
 import yechao.service.CustomerService;
 
@@ -26,6 +27,12 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public void deleteByid(int id) {
 		this.customerdao.deleteByPrimaryKey(id);
+	}
+
+	@Override
+	public void insertUser(customers customer) {
+		this.customerdao.insert(customer);
+		
 	}
 
 }

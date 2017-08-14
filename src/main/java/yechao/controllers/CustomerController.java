@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
+import yechao.model.CustomerVo;
 import yechao.model.customers;
 import yechao.service.CustomerService;
 
@@ -113,6 +114,34 @@ public class CustomerController {
 	@RequestMapping(value="/demo",method=RequestMethod.GET)
 	public ModelAndView  toDemo(){
 		ModelAndView modelAndView=new ModelAndView("test/demo");
+		Map<String, Object> modelMap=new HashMap<String, Object>();
+		modelMap.put("yechao", "right");
+		//modelAndView.addObject("yechao", "test");
+		modelAndView.addAllObjects(modelMap);
+		
+		return modelAndView;
+		
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/addUser",method=RequestMethod.GET)
+	public customers toAddCustomer( Model model) {
+		customers customerVo=new customers();
+		String name = request.getParameter("name");
+		String phone = request.getParameter("phone");
+		String address = request.getParameter("address");
+		//String id=request.getParameter("id");
+		customerVo.setName(name);
+		customerVo.setPhone(phone);
+		customerVo.setAddress(address);
+		//customerVo.setId(Integer.valueOf(id));
+		this.customerService.insertUser(customerVo);
+		return customerVo;
+	}
+	
+	@RequestMapping(value="/example",method=RequestMethod.GET)
+	public ModelAndView  toExample(){
+		ModelAndView modelAndView=new ModelAndView("test/example");
 		Map<String, Object> modelMap=new HashMap<String, Object>();
 		modelMap.put("yechao", "right");
 		//modelAndView.addObject("yechao", "test");
