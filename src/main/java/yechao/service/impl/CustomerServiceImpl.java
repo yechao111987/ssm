@@ -16,7 +16,11 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public customers getCustomerByid(int id) {
-		return this.customerdao.selectByPrimaryKey(id);
+		customers cust=this.customerdao.selectByPrimaryKey(id);
+		if (cust==null) {
+			return null;
+		}
+		return cust;
 	}
 
 	@Override

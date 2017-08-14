@@ -43,6 +43,11 @@
         <property name="typeAliasesPackage" value="yechao.model"/>  
          
     </bean>  
+    <!-- 
+    <bean id="helloBean" class="com.yechao.HelloWorld">
+		<property name="name" value="YeChao" />
+	</bean>
+	 -->
       
   
     <!-- DAO接口所在包名，Spring会自动查找其下的类 -->  
