@@ -1,6 +1,6 @@
 package yechao.model;
 
-public class customers {
+public class Customers {
     private Integer id;
 
     private String name;

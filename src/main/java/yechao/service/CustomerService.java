@@ -3,14 +3,14 @@ package yechao.service;
 import org.springframework.stereotype.Service;
 
 import yechao.model.CustomerVo;
-import yechao.model.customers;
+import yechao.model.Customers;
+
 @Service
 public interface CustomerService {
-	public customers getCustomerByid(int id);
-	
+	public Customers getCustomerByid(int id);
+
 	public void deleteByid(int id);
-	
-	public void insertUser(customers customer);
-	
+
+	public void insertUser(Customers customer);
 
 }

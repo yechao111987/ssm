@@ -12,18 +12,16 @@ import yechao.UserService;
 import yechao.UserServiceImpl;
 import yechao.model.User;
 
-public class Index {
+public class IndexController {
 
+	@RequestMapping(value = "/", method = { RequestMethod.GET })
+	public String index(Model model) {
+		return "index";
+	}
 	
-    @RequestMapping(value = "/show2?userId",method = {RequestMethod.GET})
-    public JSON showUser2(@RequestParam("userId")String userId,Model model){
-    	UserService userService=new UserServiceImpl();
-    	User user = userService.getUser(userId);
-//        model.addAttribute(user);
-//        return "showUser";
-        JSON json=(JSON) JSON.toJSON(user);
-        return json;
-        
-    }
+	@RequestMapping(value = "/index", method = { RequestMethod.GET })
+	public String toIndex(Model model) {
+		return "index";
+	}
 
 }

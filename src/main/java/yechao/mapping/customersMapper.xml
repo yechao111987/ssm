@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="yechao.dao.customersDao" >
-  <resultMap id="BaseResultMap" type="yechao.model.customers" >
+<mapper namespace="yechao.dao.CustomersDao" >
+  <resultMap id="BaseResultMap" type="yechao.model.Customers" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="address" property="address" jdbcType="VARCHAR" />
@@ -20,13 +20,13 @@
     delete from customers
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="yechao.model.customers" useGeneratedKeys="true" keyProperty="id" >
+  <insert id="insert" parameterType="yechao.model.Customers" useGeneratedKeys="true" keyProperty="id" >
     insert into customers (name, address, 
       phone)
     values (#{name,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
       #{phone,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="yechao.model.customers" >
+  <insert id="insertSelective" parameterType="yechao.model.Customers" >
     insert into customers
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -57,7 +57,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="yechao.model.customers" >
+  <update id="updateByPrimaryKeySelective" parameterType="yechao.model.Customers" >
     update customers
     <set >
       <if test="name != null" >
@@ -72,7 +72,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="yechao.model.customers" >
+  <update id="updateByPrimaryKey" parameterType="yechao.model.Customers" >
     update customers
     set name = #{name,jdbcType=VARCHAR},
       address = #{address,jdbcType=VARCHAR},

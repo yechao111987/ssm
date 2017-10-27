@@ -16,20 +16,21 @@
 			el : '#test',
 			data : {
 				msg : 'Hello World!',
-				item : ''
+				item:null
 			},
 			methods : {
 				get : function() {
+					var $this = this;
 					//发送get请求
 					this.$http.get('/ssm/user/showUser1', {
 						params : {
-							id : "1",
+							id : "2",
 							pageNum : 1,
 							pageLimit : 8
 						}
 					}).then(function(res) {
-						//alert(res.body);
-						this.$set('item', res.body);
+						alert(res.body);
+						$this.item= JSON.parse(res.body);
 					}, function() {
 						console.log('请求失败处理');
 					});
