@@ -14,7 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.alibaba.fastjson.JSON;
 
-import yechao.model.Customers;
+import yechao.model.Customer;
 import yechao.service.CustomerService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -36,7 +36,7 @@ public class TestMyBatis {
 	@Test
 	public void test1() {
 		// System.out.println(JSON.toJSONString(customerService));
-		Customers customer = customerService.getCustomerByid(2);
+		Customer customer = customerService.getCustomerByid(2);
 		System.out.println(customer.getName());
 		logger.info("客户姓名：：" + customer.getName());
 		logger.info(JSON.toJSONString(customer));

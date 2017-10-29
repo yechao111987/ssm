@@ -21,8 +21,10 @@ import org.springframework.web.servlet.ModelAndView;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
+import yechao.basic.Response;
+import yechao.manage.CustomerManage;
+import yechao.model.Customer;
 import yechao.model.CustomerVo;
-import yechao.model.Customers;
 import yechao.service.CustomerService;
 
 @Controller
@@ -33,6 +35,10 @@ public class CustomerController {
 	private CustomerService customerService;
 	@Resource
 	private HttpServletRequest request;
+	// @Resource
+	// private Response<Customers> response;
+	@Resource
+	private CustomerManage customerManage;
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView toList() {
@@ -82,7 +88,7 @@ public class CustomerController {
 	@RequestMapping(value = "/showUser", method = RequestMethod.GET, headers = "ContentType1=text_plain11")
 	public String toIndex(@RequestParam("id") Integer userId, Model model) {
 		// int userId = Integer.parseInt(request.getParameter("id"));
-		Customers user = this.customerService.getCustomerByid(userId);
+		Customer user = this.customerService.getCustomerByid(userId);
 		if (user == null) {
 			model.addAttribute("user", "用户不存在");
 			return "showUser";
@@ -93,10 +99,10 @@ public class CustomerController {
 
 	@ResponseBody
 	@RequestMapping(value = "/showUser1", method = RequestMethod.GET)
-	public Customers toIndex2(Model model) {
+	public Customer toIndex2(Model model) {
 
 		int userId = Integer.parseInt(request.getParameter("id"));
-		Customers user = this.customerService.getCustomerByid(userId);
+		Customer user = this.customerService.getCustomerByid(userId);
 		if (user == null) {
 			model.addAttribute("user", "用户不存在");
 			return null;
@@ -124,8 +130,8 @@ public class CustomerController {
 
 	@ResponseBody
 	@RequestMapping(value = "/addUser", method = RequestMethod.GET)
-	public Customers toAddCustomer(Model model) {
-		Customers customerVo = new Customers();
+	public Customer toAddCustomer(Model model) {
+		Customer customerVo = new Customer();
 		String name = request.getParameter("name");
 		String phone = request.getParameter("phone");
 		String address = request.getParameter("address");
@@ -136,6 +142,25 @@ public class CustomerController {
 		// customerVo.setId(Integer.valueOf(id));
 		this.customerService.insertUser(customerVo);
 		return customerVo;
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/addUserByManage", method = RequestMethod.GET)
+	public Response<Customer> toAddCustomerByManage(Model model) {
+		Customer customer = new Customer();
+		String name = request.getParameter("name");
+		String phone = request.getParameter("phone");
+		String address = request.getParameter("address");
+		// String id=request.getParameter("id");
+		customer.setName(name);
+		customer.setPhone(phone);
+		customer.setAddress(address);
+		// customerVo.setId(Integer.valueOf(id));
+
+		Response<Customer> response = new Response<Customer>();
+		response = customerManage.InsertCustomer(customer);
+		// this.customerService.insertUser(customer);
+		return response;
 	}
 
 	@RequestMapping(value = "/example", method = RequestMethod.GET)
