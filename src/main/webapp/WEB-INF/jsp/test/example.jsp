@@ -17,6 +17,7 @@
 		var app = new Vue({
 			el : "#app",
 			ready : function() {
+				var thi=this;
 				this.$http.get('/ssm/user/showUser1', {
 					params : {
 						id : "1",
@@ -25,7 +26,7 @@
 					}
 				}).then(function(response) {
 					alert(response.body);
-					this.$set('item', response.body);
+					thi.$set('item', response.body);
 				}, function(data, status, request) {
 					console.log('fail' + status + "," + request);
 				});

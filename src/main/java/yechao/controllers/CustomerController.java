@@ -21,7 +21,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
 import yechao.model.CustomerVo;
-import yechao.model.customers;
+import yechao.model.Customers;
 import yechao.service.CustomerService;
 
 @Controller
@@ -81,7 +81,7 @@ public class CustomerController {
 	@RequestMapping(value="/showUser",method=RequestMethod.GET)
 	public String toIndex(@RequestParam("id") Integer userId,  Model model) {
 		//int userId = Integer.parseInt(request.getParameter("id"));
-		customers user = this.customerService.getCustomerByid(userId);
+		Customers user = this.customerService.getCustomerByid(userId);
 		if (user==null) {
 			model.addAttribute("user","用户不存在");
 			return "showUser";
@@ -93,10 +93,10 @@ public class CustomerController {
 	
 	@ResponseBody
 	@RequestMapping(value="/showUser1",method=RequestMethod.GET)
-	public customers toIndex2( Model model) {
+	public Customers toIndex2( Model model) {
 
 		int userId = Integer.parseInt(request.getParameter("id"));
-		customers user = this.customerService.getCustomerByid(userId);
+		Customers user = this.customerService.getCustomerByid(userId);
 		if (user==null) {
 			model.addAttribute("user","用户不存在");
 			return null;
@@ -125,8 +125,8 @@ public class CustomerController {
 	
 	@ResponseBody
 	@RequestMapping(value="/addUser",method=RequestMethod.GET)
-	public customers toAddCustomer( Model model) {
-		customers customerVo=new customers();
+	public Customers toAddCustomer( Model model) {
+		Customers customerVo=new Customers();
 		String name = request.getParameter("name");
 		String phone = request.getParameter("phone");
 		String address = request.getParameter("address");
@@ -150,5 +150,21 @@ public class CustomerController {
 		return modelAndView;
 		
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="addCustomerVo",method=RequestMethod.GET)
+	private CustomerVo addCustomerVo() {
+		String name = request.getParameter("name");
+		String phone = request.getParameter("phone");
+		String address = request.getParameter("address");
+		CustomerVo customerVo=new CustomerVo();
+		customerVo.setName(name);
+		customerVo.setAddress(address);
+		customerVo.setPhone(phone);
+		this.customerService.insertCustomerVo(customerVo);
+		return customerVo;
+
+	}
+	
 
 }

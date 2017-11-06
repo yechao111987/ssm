@@ -4,20 +4,20 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import yechao.dao.customersDao;
+import yechao.dao.CustomersDao;
 import yechao.model.CustomerVo;
-import yechao.model.customers;
+import yechao.model.Customers;
 import yechao.service.CustomerService;
 
 @Service("CustomerService")
 public class CustomerServiceImpl implements CustomerService {
 
 	@Resource
-	private customersDao customerdao;
+	private CustomersDao customerdao;
 
 	@Override
-	public customers getCustomerByid(int id) {
-		customers cust=this.customerdao.selectByPrimaryKey(id);
+	public Customers getCustomerByid(int id) {
+		Customers cust=this.customerdao.selectByPrimaryKey(id);
 		if (cust==null) {
 			return null;
 		}
@@ -30,8 +30,15 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public void insertUser(customers customer) {
+	public void insertUser(Customers customer) {
 		this.customerdao.insert(customer);
+		
+	}
+
+	@Override
+	public void insertCustomerVo(CustomerVo customer) {
+		// TODO Auto-generated method stub
+		this.customerdao.insertCustomerVo(customer);
 		
 	}
 
