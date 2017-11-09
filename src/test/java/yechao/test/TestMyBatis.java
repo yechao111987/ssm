@@ -33,14 +33,14 @@ public class TestMyBatis {
 		customerService = (CustomerService) ac.getBean("CustomerService");
 	}
 
-	@Test
-	public void test1() {
-		// System.out.println(JSON.toJSONString(customerService));
-		Customer customer = customerService.getCustomerByid(2);
-		System.out.println(customer.getName());
-		logger.info("客户姓名：：" + customer.getName());
-		logger.info(JSON.toJSONString(customer));
-		System.out.println(JSON.toJSONString(customer));
-	}
+//	@Test
+//	public void test1() {
+//		// System.out.println(JSON.toJSONString(customerService));
+//		Customer customer = customerService.getCustomerByid(2);
+//		System.out.println(customer.getName());
+//		logger.info("客户姓名：：" + customer.getName());
+//		logger.info(JSON.toJSONString(customer));
+//		System.out.println(JSON.toJSONString(customer));
+//	}
 
 }

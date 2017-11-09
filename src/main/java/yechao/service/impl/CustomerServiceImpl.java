@@ -4,6 +4,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import yechao.basic.Response;
 import yechao.dao.CustomersDao;
 import yechao.model.Customer;
 import yechao.service.CustomerService;
@@ -15,12 +16,18 @@ public class CustomerServiceImpl implements CustomerService {
 	private CustomersDao customerdao;
 
 	@Override
-	public Customer getCustomerByid(int id) {
+	public Response<Customer> getCustomerByid(int id) {
+		Response<Customer> response=new Response<Customer>();
 		Customer cust=this.customerdao.selectByPrimaryKey(id);
 		if (cust==null) {
-			return null;
+			response.setCode("1");
+			response.setMessage("数据不存在");
+			return response;
 		}
-		return cust;
+		response.setCode("0");
+		response.setMessage("查询成功");
+		response.setDataResult(cust);
+		return response;
 	}
 
 	@Override

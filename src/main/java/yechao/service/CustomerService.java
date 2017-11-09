@@ -2,12 +2,13 @@ package yechao.service;
 
 import org.springframework.stereotype.Service;
 
+import yechao.basic.Response;
 import yechao.model.CustomerVo;
 import yechao.model.Customer;
 
 //@Service
 public interface CustomerService {
-	public Customer getCustomerByid(int id);
+	public Response<Customer> getCustomerByid(int id);
 
 	public void deleteByid(int id);
 

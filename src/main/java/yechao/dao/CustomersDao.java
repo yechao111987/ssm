@@ -1,6 +1,5 @@
 package yechao.dao;
 
-import yechao.model.CustomerVo;
 import yechao.model.Customer;
 
 public interface CustomersDao {

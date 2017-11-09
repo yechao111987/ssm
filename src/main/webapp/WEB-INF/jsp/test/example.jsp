@@ -8,6 +8,7 @@
 <script src="https://cdn.bootcss.com/vue/2.2.2/vue.min.js"></script>
 <script
 	src="https://cdn.jsdelivr.net/vue.resource/1.0.3/vue-resource.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body id="app" v-cloak>
 	<h1>111111111</h1>

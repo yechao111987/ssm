@@ -85,30 +85,33 @@ public class CustomerController {
 	}
 
 	// headers="Content-Type=text/plain"
-	@RequestMapping(value = "/showUser", method = RequestMethod.GET, headers = "ContentType1=text_plain11")
-	public String toIndex(@RequestParam("id") Integer userId, Model model) {
-		// int userId = Integer.parseInt(request.getParameter("id"));
-		Customer user = this.customerService.getCustomerByid(userId);
-		if (user == null) {
-			model.addAttribute("user", "用户不存在");
-			return "showUser";
-		}
-		model.addAttribute("user", user.getName());
-		return "showUser";
-	}
+	// @RequestMapping(value = "/showUser", method = RequestMethod.GET, headers
+	// = "ContentType1=text_plain11")
+	// public String toIndex(@RequestParam("id") Integer userId, Model model) {
+	// // int userId = Integer.parseInt(request.getParameter("id"));
+	// Customer user = this.customerService.getCustomerByid(userId);
+	// if (user == null) {
+	// model.addAttribute("user", "用户不存在");
+	// return "showUser";
+	// }
+	// model.addAttribute("user", user.getName());
+	// return "showUser";
+	// }
 
 	@ResponseBody
 	@RequestMapping(value = "/showUser1", method = RequestMethod.GET)
-	public Customer toIndex2(Model model) {
-
-		int userId = Integer.parseInt(request.getParameter("id"));
-		Customer user = this.customerService.getCustomerByid(userId);
-		if (user == null) {
-			model.addAttribute("user", "用户不存在");
-			return null;
+	public Response<Customer> toIndex2(Model model) {
+		Response<Customer> response = new Response<Customer>();
+		if (null == request.getParameter("id") || request.getParameter("id")=="" ) {
+			response.setCode("1");
+			response.setMessage("id为空");
 		}
-		model.addAttribute("user", user.getName());
-		return user;
+		int userId = Integer.parseInt(request.getParameter("id"));
+		response = this.customerService.getCustomerByid(userId);
+		if (response.getCode().equals("0") && response.getDataResult() != null) {
+			return response;
+		}
+		return response;
 	}
 
 	@RequestMapping("/deleteUser")
