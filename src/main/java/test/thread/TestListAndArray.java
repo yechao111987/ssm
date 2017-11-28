@@ -38,7 +38,7 @@ public class TestListAndArray {
 			String string = (String) iterator.next();
 			System.out.println("list=" + string + ",");
 		}
-		// linkedList，双向链表，提供了头部，手部插入和删除的方法
+		// linkedList，双向链表，提供了头部，手部插入和删除的方法，插入，删除简单，查找复杂
 		LinkedList<String> linkedList = new LinkedList<String>();
 		linkedList.add("linkedList1");
 		linkedList.addFirst("linkedList0");
@@ -46,7 +46,7 @@ public class TestListAndArray {
 			String string = (String) iterator.next();
 			System.out.println("linkedList=" + string + ",");
 		}
-		// arraylist,可变数组
+		// arraylist,可变数组，插入，删除复杂，查找简单
 		ArrayList<String> arrayList = new ArrayList<String>();
 		arrayList.add("arraylist1");
 		arrayList.add("arraylist2");
@@ -76,7 +76,7 @@ public class TestListAndArray {
 		Set<String> set2 = new HashSet<String>();
 		set.add("set1");
 		set.add("set2");
-		set.add("set3");		
+		set.add("set3");
 		set2.add("set1");
 		set2.add("set2");
 		set2.add("set3");
@@ -91,17 +91,22 @@ public class TestListAndArray {
 			System.out.println("set2=" + string);
 
 		}
-		//map
-		Map<String, Object> map=new HashMap<String, Object>();
-		
-		//hanshmap，非同步的
-		HashMap<String, Object> hashMap=new HashMap<String, Object>();
-		hashMap.put("hashmap1", "hashmap1");
-		//hashtable,同步的
-		Hashtable< String, Object> hashtable=new Hashtable<String, Object>();
-		hashtable.put("hanshtable1", "table1");
+		// map
+		Map<String, Object> map = new HashMap<String, Object>();
 
-		//
+		// hanshmap，非同步的
+		// hashmap和hashtable的区别，http://www.importnew.com/7010.html，线程安全和非线程安全，速度，jdk1.5，ConCurrentHashMap
+		HashMap<String, Object> hashMap = new HashMap<String, Object>();
+		hashMap.put("hashmap1", "hashmap1");
+		// hashtable,同步的
+		Hashtable<String, Object> hashtable = new Hashtable<String, Object>();
+		hashtable.put("hanshtable1", "table1");
+		// HashMap是hash table的一个实现，它中的键值是无序的。
+		// TreeMap是基于红黑树结构的一个实现，它是根据key来排序的。
+		// LinkedHashMap保留了插入的顺序。
+		// HashTabe是同步的，与HashMap相比，它有个同步的开销，因此如果程序是线程安全的，那么HashMap是个不错的选择。
+		// ConcurrentHashMap，个更快的hashmap，它提供了好得多的并发性。多个读操作几乎总可以并发地执行。他是锁段（默认：把hash表分为16个
+		// 段），在get，put，remove等操作中，ConcurrentHashMap只锁定当前需要用到的段，只有在求size的时候才锁定整张hash表
 	}
 
 }
