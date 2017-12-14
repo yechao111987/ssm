@@ -23,11 +23,5 @@ public class Response<T> {
 	
 	public void  setDataResult(T t) {
 		this.t=t;
-		
-		
 	}
-	
-	
-	
-
 }

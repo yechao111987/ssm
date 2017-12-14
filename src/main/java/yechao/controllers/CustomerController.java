@@ -1,31 +1,26 @@
 package yechao.controllers;
 
-import java.awt.List;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Resource;
-import javax.json.JsonObject;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 
 import yechao.basic.Response;
 import yechao.manage.CustomerManage;
 import yechao.model.Customer;
-import yechao.model.CustomerVo;
 import yechao.service.CustomerService;
+
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 
 @Controller
 @RequestMapping("/user")
@@ -84,7 +79,7 @@ public class CustomerController {
 		return map;
 	}
 
-	// headers="Content-Type=text/plain"
+    // headers="Content-Type=text/plain"
 	// @RequestMapping(value = "/showUser", method = RequestMethod.GET, headers
 	// = "ContentType1=text_plain11")
 	// public String toIndex(@RequestParam("id") Integer userId, Model model) {
@@ -159,7 +154,6 @@ public class CustomerController {
 		customer.setPhone(phone);
 		customer.setAddress(address);
 		// customerVo.setId(Integer.valueOf(id));
-
 		Response<Customer> response = new Response<Customer>();
 		response = customerManage.InsertCustomer(customer);
 		// this.customerService.insertUser(customer);
