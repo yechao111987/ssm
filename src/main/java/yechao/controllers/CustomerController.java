@@ -99,7 +99,7 @@ public class CustomerController {
     // }
 
     @ResponseBody
-    @RequestMapping(value = "/showUsershowUser", method = RequestMethod.GET)
+    @RequestMapping(value = "/showUser", method = RequestMethod.GET)
     public Response<Customer> toIndex2(Model model) {
         Response<Customer> response = new Response<Customer>();
         String aa=request.getParameter("id");
@@ -137,17 +137,17 @@ public class CustomerController {
     @ResponseBody
     @RequestMapping(value = "/addUser", method = RequestMethod.GET)
     public Customer toAddCustomer(Model model) {
-        Customer customerVo = new Customer();
+        Customer customer = new Customer();
         String name = request.getParameter("name");
         String phone = request.getParameter("phone");
         String address = request.getParameter("address");
         // String id=request.getParameter("id");
-        customerVo.setName(name);
-        customerVo.setPhone(phone);
-        customerVo.setAddress(address);
+        customer.setName(name);
+        customer.setPhone(phone);
+        customer.setAddress(address);
         // customerVo.setId(Integer.valueOf(id));
-        this.customerService.insertUser(customerVo);
-        return customerVo;
+        this.customerService.insertUser(customer);
+        return customer;
     }
 
     @ResponseBody
@@ -178,6 +178,13 @@ public class CustomerController {
 
         return modelAndView;
 
+    }
+
+
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    public ModelAndView toAddCustomerPage() {
+        ModelAndView modelAndView = new ModelAndView("test/add");
+        return modelAndView;
     }
 
 }
