@@ -94,7 +94,7 @@ public class CustomerController {
 	// }
 
 	@ResponseBody
-	@RequestMapping(value = "/showUser1", method = RequestMethod.GET)
+	@RequestMapping(value = "/showUser", method = RequestMethod.GET)
 	public Response<Customer> toIndex2(Model model) {
 		Response<Customer> response = new Response<Customer>();
 		if (null == request.getParameter("id") || request.getParameter("id")=="" ) {

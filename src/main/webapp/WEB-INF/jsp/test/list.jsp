@@ -66,28 +66,28 @@
 		});
 	}
 </script>
-<script type="text/javascript">
-new Vue({
-    ready: function () {
-        // POST请求
-        this.$http({
-            url: '',
-            method: 'get',
-            // 请求体重发送的数据
-            data: {
-                cat: 1
-            },
-            // 设置请求头
-            headers: {
-                'Content-Type': 'x-www-from-urlencoded'
-            }
-        }).then(function () {
-            // 请求成功回调
-        }, function () {
-            // 请求失败回调
-        });
-    }})
-</script>
+<%--<script type="text/javascript">--%>
+<%--new Vue({--%>
+    <%--ready: function () {--%>
+        <%--// POST请求--%>
+        <%--this.$http({--%>
+            <%--url: '',--%>
+            <%--method: 'get',--%>
+            <%--// 请求体重发送的数据--%>
+            <%--data: {--%>
+                <%--cat: 1--%>
+            <%--},--%>
+            <%--// 设置请求头--%>
+            <%--headers: {--%>
+                <%--'Content-Type': 'x-www-from-urlencoded'--%>
+            <%--}--%>
+        <%--}).then(function () {--%>
+            <%--// 请求成功回调--%>
+        <%--}, function () {--%>
+            <%--// 请求失败回调--%>
+        <%--});--%>
+    <%--}})--%>
+<%--</script>--%>
 
 
 

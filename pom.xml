@@ -191,6 +191,7 @@
 					<overwrite>true</overwrite>
 				</configuration>
 			</plugin>
+			<!-- 设置编译jdk版本为1.8 -->
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
@@ -199,5 +200,24 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<!--打包时将properties文件和xml文件打包进去，如果不加该配置下，在idea中打包，java目录下的配置文件是不会放入war包内的，导致项目报错 -->
+		<resources>
+			<resource>
+				<directory>src/maim/resources</directory>
+				<includes>
+					<include>**/*.properties</include>
+					<include>**/*.xml</include>
+				</includes>
+				<filtering>true</filtering>
+			</resource>
+			<resource>
+				<directory>src/maim/java</directory>
+				<includes>
+					<include>**/*.properties</include>
+					<include>**/*.xml</include>
+				</includes>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
 	</build>
 </project>

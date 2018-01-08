@@ -39,7 +39,12 @@
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<!-- 自动扫描mapping.xml文件 -->
-		<property name="mapperLocations" value="classpath*:yechao/mapping/*.xml"></property>
+		<property name="mapperLocations">
+			<list>
+				<value>classpath*:mapping/*.xml</value>   <!--注意设置xml文件的位置要正确，否则就会报错 -->
+			</list>
+		</property>
+
 		<property name="typeAliasesPackage" value="yechao.model" />
 
 	</bean>
