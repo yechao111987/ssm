@@ -35,7 +35,7 @@
 				getM : function() {
 					var $this = this;
 					//发送get请求
-					this.$http.get('/ssm/user/showUser1', {
+					this.$http.get('/user/showUser', {
 						params : {
 							id : $this.mess,
 							pageNum : 1,
@@ -71,7 +71,7 @@
 	<div id='test'>
 		<input v-model="mess" type="text" placeholder="编号">
 		<p>Message is: {{mess}}</p>
-		<br> <input type="button" @click="getM()" value="点我啊">
+		<br> <input type="button" @click="getM()" value="点我查询客户信息">
 		<table border="1">
 			<tr v-if="item.code === '777'">{{item.message}}
 			</tr>
