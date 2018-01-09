@@ -199,6 +199,11 @@
 					<target>1.8</target>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>net.alchim31.maven</groupId>
+				<artifactId>scala-maven-plugin</artifactId>
+			</plugin>
+			<!--scala编译插件-->
 		</plugins>
 		<!--打包时将properties文件和xml文件打包进去，如果不加该配置下，在idea中打包，java目录下的配置文件是不会放入war包内的，导致项目报错 -->
 		<resources>
