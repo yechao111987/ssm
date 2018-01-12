@@ -23,10 +23,23 @@ public class UserControllerForJava {
 
     @RequestMapping("getInfoForJava")
     @ResponseBody
-    public Response<UserScala> getInfo(@RequestParam("id") Integer id){
+    public Response<UserScala> getInfo(@RequestParam("id") Integer id) {
 //        Integer id=request.getParameter("id");
-        Response<UserScala> response=new Response<>();
-        response=this.userService.getUserInfoById(id);
+        Response<UserScala> response = new Response<>();
+        response = this.userService.getUserInfoById(id);
+        return response;
+    }
+
+
+    @RequestMapping("login")
+    @ResponseBody
+    public Response<Boolean> getInfo(@RequestParam("name") String name, @RequestParam("password") String password) {
+//        Integer id=request.getParameter("id");
+//        UserScala userScala = new UserScala();
+//        userScala.setName(name);
+//        userScala.setPassword(password);
+        Response<Boolean> response = new Response<Boolean>();
+        response = this.userService.loginByNameAndPassword(name,password);
         return response;
     }
 }
