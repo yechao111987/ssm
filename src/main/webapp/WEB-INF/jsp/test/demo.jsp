@@ -12,10 +12,9 @@
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
-    <!--
     <link rel="stylesheet" type="text/css"
-        href="https://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    -->
+          href="https://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
     <script>
         window.onload = function () {
 
@@ -35,7 +34,7 @@
                     getM: function () {
                         var $this = this;
                         //发送get请求
-                        this.$http.get('/user/showUser', {
+                        this.$http.get('/customer/showCustomer', {
                             params: {
                                 id: $this.mess,
                                 pageNum: 1,
@@ -59,20 +58,24 @@
                     msg: 'Hello World!',
                     item: null,
                     idd: '2',
-                    message: ''
+                    message: 'message'
                 }
             });
 
         }
+
     </script>
+
 </head>
 <body>
 <h1>jsp H1</h1>
 <div id='test'>
     <input v-model="mess" type="text" placeholder="编号">
     <p>Message is: {{mess}}</p>
-    <br> <input type="button" @click="getM()" value="点我查询客户信息">
-    <table border="1">
+    <br> <input type="button" @click="getM()" value="点我查询客户信息" class="btn btn-primary">
+    <br>
+    <table class="table table-striped table-bordered table-hover table-responsive">
+        <caption>客户信息</caption>
         <tr v-if="item.code === '777'">{{item.message}}
         </tr>
         <tr>
@@ -94,9 +97,11 @@
     </table>
 </div>
 <h1>jsp H2</h1>
-<div class="indexContent" v-for="item in xin_body">
-    <div class="indexContentTitle">
-        <div>{{ item11.article_id }}</div>
+<div class="indexContent">
+    <div class="indexContentTitle" id="h2">
+        <ol>
+            <li  v-for="item in xin_body">{{ item.name}}</li>
+        </ol>
     </div>
 </div>
 <h1>jsp H3</h1>
@@ -106,6 +111,16 @@
     <p>Message is: {{message}}</p>
 </div>
 
-
+<script type="text/javascript">
+    new Vue({
+        el: '#h2',
+        data: {
+            xin_body: [
+                {name: 'yechao'},
+                {name: 'ye'}
+            ]
+        }
+    })
+</script>
 </body>
 </html>

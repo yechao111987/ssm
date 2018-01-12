@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/vue/2.2.2/vue.min.js"></script>
+
+    <script
+            src="https://cdn.jsdelivr.net/vue.resource/1.0.3/vue-resource.min.js"></script>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+</head>
+<body>
+<div id='add'>
+    <input v-model="name" type="text" placeholder="用户姓名">
+    <br>
+    <input v-model="address" type="text" placeholder="地址">
+    <br>
+    <input v-model="phone" type="text" placeholder="电话号码">
+    <br> <input type="button" @click="getPost()" value="点我新增客户">
+    <br><a href="/demo">去客户列表页面</a>
+
+</div>
+
+</body>
+</html>

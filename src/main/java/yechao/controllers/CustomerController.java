@@ -1,21 +1,28 @@
 package yechao.controllers;
 
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import scala.CustomerFormScala;
 import yechao.basic.Response;
 import yechao.manage.CustomerManage;
 import yechao.model.Customer;
@@ -26,7 +33,7 @@ import com.alibaba.fastjson.JSONObject;
 import yechao.yechaoUtil.StringUtil;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/customer")
 public class CustomerController {
 
     @Resource
@@ -99,10 +106,10 @@ public class CustomerController {
     // }
 
     @ResponseBody
-    @RequestMapping(value = "/showUser", method = RequestMethod.GET)
+    @RequestMapping(value = "/showCustomer", method = RequestMethod.GET)
     public Response<Customer> toIndex2(Model model) {
         Response<Customer> response = new Response<Customer>();
-        String aa=request.getParameter("id");
+        String aa = request.getParameter("id");
         if (null == request.getParameter("id") || request.getParameter("id") == "" || !StringUtil.isNumberic(request.getParameter("id"))) {
             response.setCode("1");
             response.setMessage("id为空或者id非数字");
@@ -117,7 +124,7 @@ public class CustomerController {
         return response;
     }
 
-    @RequestMapping("/deleteUser")
+    @RequestMapping("/deleteCustoner")
     public void toDeleteById(Model model) {
         int userId = Integer.parseInt(request.getParameter("id"));
         this.customerService.deleteByid(userId);
@@ -135,7 +142,7 @@ public class CustomerController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/addUser", method = RequestMethod.GET)
+    @RequestMapping(value = "/addCustomer", method = RequestMethod.GET)
     public Customer toAddCustomer(Model model) {
         Customer customer = new Customer();
         String name = request.getParameter("name");
@@ -151,7 +158,45 @@ public class CustomerController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/addUserByManage", method = RequestMethod.GET)
+    @RequestMapping(value = "/addCustomerByPost", method = RequestMethod.POST)
+    public Response<Customer> toAddCustomerByPost() {
+        Response<Customer> response = new Response<>();
+        String info = null;
+        try {
+            info = IOUtils.toString(request.getInputStream(), StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        log.error(info);
+        Map<String, Object> map = new HashMap<>();
+        CustomerFormScala customerFormScala = JSON.parseObject(info, CustomerFormScala.class);
+        Customer customer=new Customer();
+        if (null == customer) {
+            response.setCode("1");
+            response.setMessage("参数不正确");
+            return response;
+        }
+        String aesinfo = DigestUtils.sha1Hex(info);
+        log.error(aesinfo);
+//        String phone = request.getParameter("phone");
+//        String address = request.getParameter("address");
+        // String id=request.getParameter("id");
+        String name = "1";
+        String phone = "11";
+        String address = "111";
+        customer.setName(customerFormScala.getName());
+        customer.setPhone(customerFormScala.getPhone());
+        customer.setAddress(customerFormScala.getAddress());
+        // customerVo.setId(Integer.valueOf(id));
+        this.customerService.insertUser(customer);
+        response.setCode("0");
+        response.setMessage("新增成功");
+        response.setDataResult(customer);
+        return response;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/addCustomerByManage", method = RequestMethod.GET)
     public Response<Customer> toAddCustomerByManage(Model model) {
         Customer customer = new Customer();
         String name = request.getParameter("name");

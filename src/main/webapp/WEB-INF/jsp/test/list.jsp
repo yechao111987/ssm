@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>用户列表页</title>
+    <title>客户列表页</title>
     <script src="https://cdn.bootcss.com/vue/2.2.2/vue.min.js"></script>
     <script
             src="https://cdn.jsdelivr.net/vue.resource/1.0.3/vue-resource.min.js"></script>
@@ -18,7 +18,7 @@
                 methods: {
                     get: function () {
                         //发送get请求
-                        this.$http.get('/ssm/user/list4').then(function (res) {
+                        this.$http.get('/customer/list4').then(function (res) {
                             alert(res.body);
                         }, function () {
                             console.log('请求失败处理');
@@ -34,7 +34,7 @@
                 methods: {
                     get: function () {
                         //发送get请求
-                        this.$http.get('/user/showUser', {
+                        this.$http.get('/customer/showCustomer', {
                             id: 1
                         }).then(function (res) {
                             alert(res.body);
@@ -52,7 +52,7 @@
                 methods: {
                     get2: function () {
                         //发送get请求
-                        this.$http.get('/user/showUser1', {
+                        this.$http.get('/customer/shoCustomer1', {
                             'id': 2
                         }).then(function (res) {
                             alert(res.body);

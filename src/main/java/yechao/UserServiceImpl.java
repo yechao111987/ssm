@@ -9,12 +9,12 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import yechao.model.User;
 
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserServiceForTest {
 
 	@Override
 	public User getUser(String id) {
 		// TODO Auto-generated method stub
-		NamedParameterJdbcTemplate namedParameterJdbcTemplate = UserDao
+		NamedParameterJdbcTemplate namedParameterJdbcTemplate = UserDaoForDemo
 				.getNamedParameterJdbcTemplate();
 		Map<String, Object>  paramMap=new HashMap<String, Object>();
 		paramMap.put("id", id);

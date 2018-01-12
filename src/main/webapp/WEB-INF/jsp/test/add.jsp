@@ -21,38 +21,71 @@
     <script>
         window.onload = function () {
             var vm = new Vue({
-                el: '#add',
-                data: {
-                    msg: 'Hello World!',
-                    item: null,
-                    name: '',
-                    address: '',
-                    phone: '',
-                    item: '',
-                    customer: ''
-                },
+                    el: '#add',
+                    data: {
+                        msg: 'Hello World!',
+                        item: null,
+                        name: '',
+                        address: '',
+                        phone: '',
+                        item: '',
+                        customer: ''
+                    },
 
-                methods: {
-                    getM: function () {
-                        var $this = this;
-                        //发送get请求
-                        this.$http.get('/user/addUser', {
-                            params: {
+                    methods: {
+                        getM: function () {
+                            var $this = this;
+                            //发送get请求
+                            this.$http.get('/customer/addCustomer', {
+                                params: {
+                                    name: $this.name,
+                                    address: $this.address,
+                                    phone: $this.phone
+                                }
+                            }).then(function (res) {
+                                alert(res.body);
+                                console.error(res)
+;                                $this.item = JSON.parse(res.body);//将相应信息转化为item对象、
+                            }, function () {
+                                console.log('请求失败处理');
+                            });
+                        },
+                        getP: function () {
+                            var $this = this;
+                            //发送get请求
+                            this.$http.post('/customer/addCustomerByPost', {
+                                params: {
+                                    name: $this.name,
+                                    address: $this.address,
+                                    phone: $this.phone
+                                }
+                            }).then(function (res) {
+                                alert(res.body);
+                                $this.item = JSON.parse(res.body);//将相应信息转化为item对象、
+                            }, function () {
+                                console.log('请求失败处理');
+                            });
+                        },
+                        getPost: function () {
+                            var $this = this;
+                            //发送get请求
+                            this.$http.post('/customer/addCustomerByPost', {
                                 name: $this.name,
                                 address: $this.address,
                                 phone: $this.phone
-                            }
-                        }).then(function (res) {
-                            alert(res.body);
-                            $this.item = JSON.parse(res.body);//将相应信息转化为item对象、
-                        }, function () {
-                            console.log('请求失败处理');
-                        });
-                    }
-                },
-            });
 
+                            }).then(function (res) {
+                                alert(res.body);
+                                $this.item = JSON.parse(res.body);//将相应信息转化为item对象、
+                            }, function () {
+                                console.log('请求失败处理');
+                            });
+                        }
 
+                    },
+                }
+                )
+            ;
         }
 
 
@@ -66,7 +99,8 @@
     <input v-model="address" type="text" placeholder="地址">
     <br>
     <input v-model="phone" type="text" placeholder="电话号码">
-    <br> <input type="button" @click="getM()" value="点我新增客户">
+    <br> <input type="button" @click="getPost()" value="点我新增客户">
+    <br><a href="/demo" >去客户列表页面</a>
 
 </div>
 

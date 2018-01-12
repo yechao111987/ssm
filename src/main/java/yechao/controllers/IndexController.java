@@ -52,4 +52,11 @@ public class IndexController {
 
 	}
 
+	@RequestMapping(value = "/axios", method = RequestMethod.GET)
+	public ModelAndView toAxios() {
+		ModelAndView modelAndView = new ModelAndView("demo/index");
+		return modelAndView;
+
+	}
+
 }

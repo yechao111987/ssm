@@ -1,7 +1,6 @@
 package scala
 
 
-
 import scala.beans.BeanProperty
 
 
@@ -13,7 +12,7 @@ object ScalaDemo1 {
   }
 }
 
-class User {
+class UserScala {
   @BeanProperty var uid: String = _ //
   @BeanProperty var name: String = _
   //
@@ -23,3 +22,27 @@ class User {
   //
   @BeanProperty var address: String = _ //
 }
+
+class CustomerScala {
+  @BeanProperty var cid: Integer = _ //
+  @BeanProperty var name: String = _
+  //
+  @BeanProperty var address: String = _
+  //
+  @BeanProperty var phone: String = _
+  //
+}
+
+class CustomerFormScala{
+  @BeanProperty var name: String = _
+  //
+  @BeanProperty var address: String = _
+  //
+  @BeanProperty var phone: String = _
+
+}
+
+
+
+
+
