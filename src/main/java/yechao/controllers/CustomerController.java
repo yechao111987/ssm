@@ -59,7 +59,6 @@ public class CustomerController {
 
     }
 
-    @ResponseBody
     @RequestMapping(value = "/list2", method = RequestMethod.GET)
     public String toTest() {
         ModelAndView modelAndView = new ModelAndView("test/list");

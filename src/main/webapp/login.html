@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Page</title>
+    <script src="https://cdn.bootcss.com/vue/2.2.2/vue.min.js"></script>
+    <script src="login.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+</head>
+</head>
+<body>
+<div id='login'>
+    <label for="name">登录名称</label>
+    <input v-model="name" type="text" placeholder="用户姓名" class="form-control">
+    <br>
+    <input v-model="password" type="password" placeholder="密码" class="form-control">
+    <br>
+    <br> <input type="button" @click="login()" value="登录" class="btn btn-primary">
+    <br><a href="/register.html">去注册用户</a>
+    <br><a href="/login?">Test</a>
+</div>
+<div id="1212"></div>
+<form id="myform" name="myform" method="post" onsubmit="return sumbitTest();" action="RegisterAction.action">
+    <table>
+        <tr>
+            <td>姓名:</td>
+            <td> <input type="text" name="name" /> </td>
+        </tr>
+        <tr>
+            <td>性别:</td>
+            <td>
+                <input type="radio" name="sex" value="1"> 男
+                <input type="radio" name="sex" value="0"> 女
+            </td>
+        </tr>
+        <tr>
+            <td>年龄:</td>
+            <td>
+                <select name="age">
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" value="Submit普通提交" class="btn btn-primary">
+                <input type="button" id="ajaxBtn" value="AJAX提交" />
+                <input type="button" id="jqueryBtn" value="jQuery提交" />
+                <input type="button" id="jsBtn" value="JS提交"/>
+                <input type="submit" value="onSubmit提交" />
+            </td>
+        </tr>
+    </table>
+
+
+</form>
+
+</body>
+</html>

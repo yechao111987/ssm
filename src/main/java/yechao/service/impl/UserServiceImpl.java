@@ -1,5 +1,6 @@
 package yechao.service.impl;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import scala.UserScala;
@@ -12,14 +13,17 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserDao userDao;
 
+    final static Logger log=Logger.getLogger(UserServiceImpl.class);
+
 
     @Override
     public Response<Boolean> loginByNameAndPassword(String name, String password) {
         Response<Boolean> response = new Response<>();
         UserScala userForm = new UserScala();
-        userForm.setName("yechao");
-        userForm.setPassword("yechao");
+        userForm.setName(name);
+        userForm.setPassword(password);
         if (null != userDao.selectByNameAndPassword(userForm) && userDao.selectByNameAndPassword(userForm).getUid() != null) {
+            log.info("uid is "+userDao.selectByNameAndPassword(userForm).getUid());
             response.setCode("0");
             response.setMessage("用户名和密码正确");
             response.setDataResult(true);
