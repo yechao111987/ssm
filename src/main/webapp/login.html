@@ -6,6 +6,7 @@
     <script src="https://cdn.bootcss.com/vue/2.2.2/vue.min.js"></script>
     <script src="login.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="http://cdn.bootcss.com/blueimp-md5/1.1.0/js/md5.js"></script>
     <link rel="stylesheet" type="text/css"
           href="https://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
 </head>
@@ -17,7 +18,9 @@
     <br>
     <input v-model="password" type="password" placeholder="密码" class="form-control">
     <br>
+    <p>{{message}}</p>
     <br> <input type="button" @click="login()" value="登录" class="btn btn-primary">
+
     <br><a href="/register.html">去注册用户</a>
     <br><a href="/login?">Test</a>
 </div>
@@ -26,7 +29,7 @@
     <table>
         <tr>
             <td>姓名:</td>
-            <td> <input type="text" name="name" /> </td>
+            <td><input type="text" name="name"/></td>
         </tr>
         <tr>
             <td>性别:</td>
@@ -48,10 +51,10 @@
         <tr>
             <td colspan="2">
                 <input type="submit" value="Submit普通提交" class="btn btn-primary">
-                <input type="button" id="ajaxBtn" value="AJAX提交" />
-                <input type="button" id="jqueryBtn" value="jQuery提交" />
+                <input type="button" id="ajaxBtn" value="AJAX提交"/>
+                <input type="button" id="jqueryBtn" value="jQuery提交"/>
                 <input type="button" id="jsBtn" value="JS提交"/>
-                <input type="submit" value="onSubmit提交" />
+                <input type="submit" value="onSubmit提交"/>
             </td>
         </tr>
     </table>

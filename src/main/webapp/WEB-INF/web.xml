@@ -14,11 +14,15 @@
         <filter-class>yechao.filter.SessionFilter</filter-class>
         <init-param>
             <param-name>logonStrings</param-name><!-- 对登录页面不进行过滤 -->
-            <param-value>/project/index.jsp;login.do;/index.html;/user/loginTest;/login.html</param-value>
+            <param-value>/login.html;/user/login</param-value>
         </init-param>
         <init-param>
             <param-name>includeStrings</param-name><!-- 只对指定过滤参数后缀进行过滤 -->
             <param-value>.do;.jsp</param-value>
+        </init-param>
+        <init-param>
+            <param-name>notIncludeStrings</param-name><!-- 指定过滤参数后缀不过滤 -->
+            <param-value>.js;.css;.ico</param-value>
         </init-param>
         <init-param>
             <param-name>redirectPath</param-name><!-- 未通过跳转到登录界面 -->

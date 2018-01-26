@@ -13,25 +13,19 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserDao userDao;
 
-    final static Logger log=Logger.getLogger(UserServiceImpl.class);
+    final static Logger log = Logger.getLogger(UserServiceImpl.class);
 
 
     @Override
-    public Response<Boolean> loginByNameAndPassword(String name, String password) {
-        Response<Boolean> response = new Response<>();
+    public Boolean loginByNameAndPassword(String name, String password) {
         UserScala userForm = new UserScala();
         userForm.setName(name);
         userForm.setPassword(password);
         if (null != userDao.selectByNameAndPassword(userForm) && userDao.selectByNameAndPassword(userForm).getUid() != null) {
-            log.info("uid is "+userDao.selectByNameAndPassword(userForm).getUid());
-            response.setCode("0");
-            response.setMessage("用户名和密码正确");
-            response.setDataResult(true);
-            return  response;
+            log.info("uid is " + userDao.selectByNameAndPassword(userForm).getUid());
+            return true;
         }
-        response.setCode("1");
-        response.setMessage("用户和密码不正确");
-        return response;
+        return false;
     }
 
     @Override
@@ -49,5 +43,18 @@ public class UserServiceImpl implements UserService {
         response.setMessage("用户信息查询成功");
         response.setDataResult(user);
         return response;
+    }
+
+    @Override
+    public Boolean register(UserScala userScala) {
+        if (userDao.insert(userScala) == 1) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public UserScala getUserInfoByName(String name) {
+        return userDao.selectByUserName(name);
     }
 }

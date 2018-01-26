@@ -11,6 +11,10 @@ public interface UserDao {
 
     UserScala selectByPrimaryKey(Integer id);
 
+    UserScala selectByUserName(String name);
+
+    Integer selectByName(String name);
+
     UserScala selectByNameAndPassword(UserScala user);
 
     int updateByPrimaryKeySelective(UserScala user);

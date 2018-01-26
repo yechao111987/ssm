@@ -4,7 +4,13 @@ import scala.UserScala;
 import yechao.basic.Response;
 
 public interface UserService {
-    public Response<Boolean> loginByNameAndPassword(String name,String password);
+    public Boolean loginByNameAndPassword(String name, String password);
 
     public Response<UserScala> getUserInfoById(Integer id);
+
+    public Boolean register(UserScala userScala);
+
+    public UserScala getUserInfoByName(String name);
+
+
 }

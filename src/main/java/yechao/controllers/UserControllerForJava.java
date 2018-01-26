@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import scala.UserScala;
 import yechao.basic.Response;
+import yechao.basic.StaticVar;
 import yechao.model.User;
 import yechao.service.UserService;
+import yechao.yechaoUtil.AesEncode;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
@@ -44,37 +46,71 @@ public class UserControllerForJava {
 
     @RequestMapping("login")
     @ResponseBody
-    public Response<Boolean> getInfo(@RequestParam("name") String name, @RequestParam("password") String password, HttpServletResponse httpServletResponse) throws IOException, ServletException {
+    public Response<Boolean> login(@RequestParam("name") String name, @RequestParam("password") String password, HttpServletResponse httpServletResponse) throws IOException, ServletException {
         Response<Boolean> response = new Response<Boolean>();
-        response = this.userService.loginByNameAndPassword(name, password);
-        log.error(response.getMessage() + ";" + response.getCode());
-//        if (response.getCode().equalsIgnoreCase("0")) {
-//            ModelAndView modelAndView = new ModelAndView("jsp/demo.jsp");
-//            return response;
-//        }
-//        request.getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(request, httpServletResponse);
-//        httpServletResponse.sendRedirect("/demo");
-        return response;
-    }
-
-    @RequestMapping("loginTest")
-    public void logintest(@RequestParam("name") String name, @RequestParam("password") String password, HttpServletResponse httpServletResponse) throws IOException, ServletException {
-        Response<Boolean> response = new Response<Boolean>();
-        response = this.userService.loginByNameAndPassword(name, password);
-        log.error(response.getMessage() + ";" + response.getCode());
-        if (response.getCode().equalsIgnoreCase("0")) {
-            Cookie cookie = new Cookie(name, password);
+        if (userService.loginByNameAndPassword(name, password)) {
+            //写入cookie
+            String content = name + password;
+            String aesString = AesEncode.AESEncode(StaticVar.AESKEY, content);
+            Cookie cookie = new Cookie("token", aesString);
             cookie.setHttpOnly(true);
             cookie.setPath("/");
             cookie.setMaxAge(5000);
             httpServletResponse.addCookie(cookie);
-//            httpServletResponse.sendRedirect("/demo");
-//            request.getSession().setAttribute();
-            HttpSession session=request.getSession();
-            String ss=session.getId();
-            session.setAttribute("loginName", ss);
-            request.getRequestDispatcher("/WEB-INF/jsp/showUser.jsp").forward(request, httpServletResponse);
+            //设置session
+            HttpSession session = request.getSession();
+            String ssid = session.getId();
+            session.setAttribute("loginName", ssid);
+            response.setCode("0");
+            response.setMessage("用户登录成功");
+            response.setDataResult(true);
+            return response;
+        }
+        response.setCode("1");
+        response.setMessage("用户名或者密码错误");
+        response.setDataResult(false);
+        return response;
+    }
+
+    @RequestMapping("register")
+    @ResponseBody
+    public Response<Boolean> register(@RequestParam("name") String name, @RequestParam("password") String password, HttpServletResponse httpServletResponse) throws IOException, ServletException {
+        Response<Boolean> response = new Response<Boolean>();
+        UserScala userScala = new UserScala();
+        log.info(name);
+        log.info(password);
+        if (null == name || null == password) {
+            response.setCode("1");
+            response.setMessage("密码或者用户名为空");
+            response.setDataResult(false);
+            return response;
+        }
+        if (null != userService.getUserInfoByName(name)) {
+            response.setCode("2");
+            response.setMessage("用户名已结存在");
+            response.setDataResult(false);
+            return response;
+        }
+        userScala.setName(name);
+        userScala.setPassword(password);
+        if (null != request.getParameter("address")) {
+            userScala.setAddress(request.getParameter("addresss"));
 
         }
+        if (null != request.getParameter("phone")) {
+            userScala.setAddress(request.getParameter("phone"));
+        }
+        if (userService.register(userScala)) {
+            response.setCode("0");
+            response.setMessage("用户注册成功");
+            response.setDataResult(true);
+            return response;
+        } else {
+            response.setCode("1");
+            response.setMessage("用户注册失败");
+            response.setDataResult(false);
+            return response;
+        }
     }
+
 }

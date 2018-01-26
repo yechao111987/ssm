@@ -1,9 +1,11 @@
 package yechao.interceptor;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 import sun.misc.JavaNetHttpCookieAccess;
+import yechao.filter.SessionFilter;
 import yechao.service.UserService;
 
 import javax.servlet.http.Cookie;
@@ -16,12 +18,18 @@ public class LoginInterceptor implements HandlerInterceptor {
     @Autowired
     private UserService userService;
 
+    private final static Logger log = Logger.getLogger(SessionFilter.class);
+
+
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
+
+        log.info("loginservelet");
         //获取请求的URL
         String url = httpServletRequest.getRequestURI();
+        log.info(url);
         //URL:login.jsp是公开的;这个demo是除了login.jsp是可以公开访问的，其它的URL都进行拦截控制
-        if (url.indexOf("login.jsp") >= 0) {
+        if (url.indexOf("login.jsp") >= 0 || url.indexOf("login.html") >= 0) {
             return true;
         }
         //获取Session
@@ -42,7 +50,7 @@ public class LoginInterceptor implements HandlerInterceptor {
                 upassword = cookies[i].getValue();
             }
         }
-        if (null != userService.loginByNameAndPassword(uname, upassword) && userService.loginByNameAndPassword(uname, upassword).getCode().equalsIgnoreCase("0")) {
+        if (userService.loginByNameAndPassword(uname, upassword)) {
             return true;
         }
 
