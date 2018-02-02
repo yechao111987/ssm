@@ -16,7 +16,7 @@ window.onload = function () {
             getM: function () {
                 var $this = this;
                 //发送get请求
-                this.$http.get('/customer/showCustomer', {
+                axios.get('/customer/showCustomer', {
                     params: {
                         id: $this.mess,
                         pageNum: 1,
@@ -31,8 +31,8 @@ window.onload = function () {
             }
         },
     });
-    var vmlist;
-    vmlist = new Vue({
+
+    var vmlist = new Vue({
         el: '#list',
         data: {
             pageNum: '',
@@ -43,9 +43,10 @@ window.onload = function () {
             getList: function () {
                 var $this = this;
                 //发送get请求
-                this.$http.get('customer/showCustomerList', {
+                axios.get('/customer/list', {
                     params: {
-                        pageNum: 1,
+                        current: 1,
+                        size: 2,
                     }
                 }).then(function (res) {
                     $this.resp = res.body;

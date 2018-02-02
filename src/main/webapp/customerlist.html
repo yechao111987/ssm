@@ -22,15 +22,16 @@
                     <li><a href="/index.html">Home</a></li>
                     <li><a href="/register.html">Register</a></li>
                     <li class="active"><a href="/customerlist.html">Customer</a></li>
-                    <li><a href="/CustomerSearch.html">CustomerSearch</a></li>
+                    <li><a href="/customerSearch.html">CustomerSearch</a></li>
                 </ul>
             </div>
             <div class="col-md-11 column">
                 <div id='list'>
                     <h3>ListPage</h3>
+                    <input type="button" @click="getList()" value="点我查询客户信息" class="btn btn-primary">
                     <table class="table table-striped table-bordered table-hover table-responsive">
                         <caption>客户信息</caption>
-                        <tr v-if="resp.code === '777'">
+                        <tr v-if="resp === '777'">
                             <!--//{{item.message}}-->
                         </tr>
                         <tr>
@@ -42,7 +43,7 @@
                             <th>operation</th>
                         </tr>
                         </tr>
-                        <tr v-if="resp.code === '0'">
+                        <tr v-if="resp === '0'">
                             <td>{{customer.id}}</td>
                             <td>{{customer.name}}</td>
                             <td>{{customer.phone}}</td>
