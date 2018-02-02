@@ -1,7 +1,6 @@
 package yechao.controllers;
 
 import java.io.IOException;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,13 +15,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import scala.CustomerFormScala;
+import yechao.basic.PageForm;
 import yechao.basic.Response;
 import yechao.manage.CustomerManage;
 import yechao.model.Customer;
@@ -47,15 +44,13 @@ public class CustomerController {
 
     private final static Logger log = Logger.getLogger(CustomerController.class);
 
+    @ResponseBody
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public ModelAndView toList() {
-        ModelAndView modelAndView = new ModelAndView("test/list");
-        Map<String, Object> modelMap = new HashMap<String, Object>();
-        modelMap.put("yechao", "right");
-        // modelAndView.addObject("yechao", "test");
-        modelAndView.addAllObjects(modelMap);
-
-        return modelAndView;
+    public PageForm toList(@RequestParam("current") Integer currentPage, @RequestParam("size") Integer size) {
+        PageForm pageForm = new PageForm();
+        pageForm = customerService.listByPage(currentPage, size);
+        log.error(JSON.toJSONString(pageForm));
+        return pageForm;
 
     }
 
@@ -169,7 +164,7 @@ public class CustomerController {
         log.error(info);
         Map<String, Object> map = new HashMap<>();
         CustomerFormScala customerFormScala = JSON.parseObject(info, CustomerFormScala.class);
-        Customer customer=new Customer();
+        Customer customer = new Customer();
         if (null == customer) {
             response.setCode("1");
             response.setMessage("参数不正确");
@@ -230,5 +225,6 @@ public class CustomerController {
         ModelAndView modelAndView = new ModelAndView("test/add");
         return modelAndView;
     }
+
 
 }

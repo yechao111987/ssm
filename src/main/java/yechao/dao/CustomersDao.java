@@ -2,6 +2,9 @@ package yechao.dao;
 
 import yechao.model.Customer;
 
+import java.util.List;
+
+
 public interface CustomersDao {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +17,8 @@ public interface CustomersDao {
     int updateByPrimaryKeySelective(Customer record);
 
     int updateByPrimaryKey(Customer record);
+
+    Integer countCustomer();
+
+    List<Customer> queryByPage(Integer start, Integer end);
 }

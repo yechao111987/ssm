@@ -31,5 +31,39 @@ window.onload = function () {
             }
         },
     });
+    var vmlist;
+    vmlist = new Vue({
+        el: '#list',
+        data: {
+            pageNum: '',
+            resp: '',
+            customer: ''
+        },
+        computed: {
+            getList: function () {
+                var $this = this;
+                //发送get请求
+                this.$http.get('customer/showCustomerList', {
+                    params: {
+                        pageNum: 1,
+                    }
+                }).then(function (res) {
+                    $this.resp = res.body;
+                    $this.customer = res.body.dataResult;
+                    console.info(res.body);
+                }, function (reason) {
+                    console.error(reason.body);
+                    console.error("处理失败！");
+                })
+            }
+
+        }
+
+    });
+
+
 }
+
+
+
 

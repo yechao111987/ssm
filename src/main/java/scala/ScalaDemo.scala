@@ -1,6 +1,8 @@
 package scala
 
 
+import yechao.model.Customer
+
 import scala.beans.BeanProperty
 
 
@@ -33,13 +35,21 @@ class CustomerScala {
   //
 }
 
-class CustomerFormScala{
+class CustomerFormScala {
   @BeanProperty var name: String = _
   //
   @BeanProperty var address: String = _
   //
   @BeanProperty var phone: String = _
 
+}
+
+class PageFormTest {
+  @BeanProperty var pageNum: Integer = _
+  //
+  @BeanProperty var pageSize: Integer = _ //
+  @BeanProperty var totalPage: Integer = _ //
+  @BeanProperty var totalCount: Integer = _ //
 }
 
 
