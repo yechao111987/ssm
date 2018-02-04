@@ -220,7 +220,7 @@
         <!--打包时将properties文件和xml文件打包进去，如果不加该配置下，在idea中打包，java目录下的配置文件是不会放入war包内的，导致项目报错 -->
         <resources>
             <resource>
-                <directory>src/maim/resources</directory>
+                <directory>src/main/resources</directory>
                 <includes>
                     <include>**/*.properties</include>
                     <include>**/*.xml</include>
@@ -228,7 +228,7 @@
                 <filtering>true</filtering>
             </resource>
             <resource>
-                <directory>src/maim/java</directory>
+                <directory>src/main/java</directory>
                 <includes>
                     <include>**/*.properties</include>
                     <include>**/*.xml</include>
