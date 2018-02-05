@@ -23,7 +23,8 @@ window.onload = function () {
                         pageLimit: 8
                     }
                 }).then(function (res) {
-                    $this.item = JSON.parse(res.body);//将相应信息转化为item对象、
+                    console.info(res);
+                    $this.item = res.data;//将相应信息转化为item对象、
                     $this.customer = $this.item.dataResult;
                 }, function () {
                     console.log('请求失败处理');
@@ -37,10 +38,11 @@ window.onload = function () {
         data: {
             pageNum: '',
             resp: '',
-            customer: ''
+            customers: ',',
+            pageInfo: ''
         },
-        computed: {
-            getList: function () {
+        methods: {
+         43   getList: function () {
                 var $this = this;
                 //发送get请求
                 axios.get('/customer/list', {
@@ -49,9 +51,12 @@ window.onload = function () {
                         size: 2,
                     }
                 }).then(function (res) {
-                    $this.resp = res.body;
-                    $this.customer = res.body.dataResult;
-                    console.info(res.body);
+                    console.info(res);
+                    // console.info(JSON.parse(res.body));
+                    console.info(res.data);
+                    $this.resp = res.data;
+                    $this.customers = res.data.list;
+                    console.info($this.resp);
                 }, function (reason) {
                     console.error(reason.body);
                     console.error("处理失败！");
