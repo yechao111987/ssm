@@ -42,7 +42,7 @@ window.onload = function () {
             pageInfo: ''
         },
         methods: {
-         43   getList: function () {
+            getList: function () {
                 var $this = this;
                 //发送get请求
                 axios.get('/customer/list', {
