@@ -49,6 +49,8 @@ public class CustomerController {
     public PageForm toList(@RequestParam("current") Integer currentPage, @RequestParam("size") Integer size) {
         PageForm pageForm = new PageForm();
         pageForm = customerService.listByPage(currentPage, size);
+        log.info(currentPage);
+        log.info(size);
         log.error(JSON.toJSONString(pageForm));
         return pageForm;
 

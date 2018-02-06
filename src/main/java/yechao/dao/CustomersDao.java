@@ -20,5 +20,5 @@ public interface CustomersDao {
 
     Integer countCustomer();
 
-    List<Customer> queryByPage(Integer start, Integer end);
+    List<Customer> queryByPage(Integer start, Integer size);
 }

@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script src="https://cdn.bootcss.com/vue/2.2.2/vue.min.js"></script>
-    <script src="/customer.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -28,7 +27,6 @@
             <div class="col-md-11 column">
                 <div id='list'>
                     <h3>ListPage</h3>
-                    <input type="button" @click="getList()" value="客户列表" class="btn btn-primary">
                     <table class="table table-striped table-bordered table-hover table-responsive">
                         <caption>客户信息</caption>
                         <tr v-if="resp === '777'">
@@ -43,12 +41,12 @@
                             <th>operation</th>
                         </tr>
                         </tr>
-                        <tr v-if="resp.totalcount !== null" v-for="customer in customers">
+                        <tr v-if="resp !== null" v-for="customer in customers">
                             <td>{{customer.id}}</td>
                             <td>{{customer.name}}</td>
                             <td>{{customer.phone}}</td>
                             <td>{{customer.address}}</td>
-                            <td>{{resp.dataResult}}</td>
+                            <td>{{customer}}</td>
                             <td>
                                 <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal_edit">
                                     编辑
@@ -56,36 +54,24 @@
                                 <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal_del">删除
                                 </button>
                             </td>
-
                         </tr>
                     </table>
+                    <div>
+                        <page :current="cur" :showitem="10" :allpage="resp"></page>
+                    </div>
                 </div>
-
-                <div>
+                <script type="text/x-template" id="page1">
                     <ul class="pagination">
-                        <li>
-                            <a href="#">Prev</a>
+                        <li v-show="current != 1" @click="current-- && goto(current)"><a href="#">上一页</a></li>
+                        <li v-for="index in pages" @click="goto(index)" :class="{'active':false}"
+                            :key="index">
+                            <a href="#">{{index}}</a>
                         </li>
-                        <li>
-                            <a href="#">1</a>
-                        </li>
-                        <li>
-                            <a href="#">2</a>
-                        </li>
-                        <li>
-                            <a href="#">3</a>
-                        </li>
-                        <li>
-                            <a href="#">4</a>
-                        </li>
-                        <li>
-                            <a href="#">5</a>
-                        </li>
-                        <li>
-                            <a href="#">Next</a>
-                        </li>
+                        <!--<li v-show="allpage != current && allpage != 0 " @click="current++ && goto(current++)"><a-->
+                                <!--href="#">下一页</a></li>-->
+                        <li>{{current}}</li>
                     </ul>
-                </div>
+                </script>
             </div>
 
             <!--模态框_编辑-->
@@ -125,5 +111,17 @@
                     </div><!-- /.modal-content -->
                 </div><!-- /.modal -->
             </div>
+            <script type="text/x-template" id="page">
+                <ul class="pagination">
+                    <li v-show="current != 1" @click="current-- && goto(current)"><a href="#">上一页</a></li>
+                    <li v-for="index in pages" @click="goto(index)" :class="{'active':current == index}" :key="index">
+                        <a href="#">{{index}}</a>
+                    </li>
+                    <li v-show="allpage != current && allpage != 0 " @click="current++ && goto(current++)"><a href="#">下一页</a>
+                    </li>
+                </ul>
+            </script>
+            <script src="/customer.js"></script>
+
 </body>
 </html>

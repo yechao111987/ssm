@@ -2,10 +2,13 @@ package yechao.service.impl;
 
 import javax.annotation.Resource;
 
+import com.alibaba.fastjson.JSON;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import yechao.basic.PageForm;
 import yechao.basic.Response;
+import yechao.controllers.CustomerController;
 import yechao.dao.CustomersDao;
 import yechao.model.Customer;
 import yechao.service.CustomerService;
@@ -18,6 +21,9 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Resource
     private CustomersDao customerdao;
+
+    private final static Logger log = Logger.getLogger(CustomerServiceImpl.class);
+
 
     @Override
     public Response<Customer> getCustomerByid(int id) {
@@ -67,9 +73,10 @@ public class CustomerServiceImpl implements CustomerService {
             return pageForm;
         }
         if (currentPage * pageSize <= count.intValue()) {
-            list = customerdao.queryByPage((currentPage - 1) * pageSize, currentPage * pageSize);
+            list = customerdao.queryByPage((currentPage - 1) * pageSize, pageSize);
+            log.info(JSON.toJSONString(list));
         } else {
-            list = customerdao.queryByPage((currentPage - 1) * pageSize, count.intValue());
+            list = customerdao.queryByPage((currentPage - 1) * pageSize, pageSize);
         }
         pageForm.setList(list);
         pageForm.setTotalCount(count.intValue());
