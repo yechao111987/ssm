@@ -4,7 +4,7 @@ window.onload = function () {
         data: {
             pageNum: '',
             resp: '',
-            cur: '',
+            current: '',
             customers: ',',
             pageInfo: '',
             mydata: [],
@@ -25,8 +25,8 @@ window.onload = function () {
                     $this.resp = res.data.totalPage;
                     console.info('111' + res.data.totalPage);
                     $this.customers = res.data.list;
-                    $this.cur = res.data.pageNum;
-                    console.info("cur:"+$this.cur);
+                    $this.current = res.data.pageNum;
+                    console.info("cur:" + $this.cur);
                 }, function (reason) {
                     console.error(reason.body);
                     console.error("处理失败！");
@@ -41,22 +41,19 @@ window.onload = function () {
     });
     Vue.component("page", {
         template: "#page1",
-        data: {
-            customers1: '',
+        data: function () {
+            return {
+                cur: 1,
+            }
         },
         props: ['current', 'showitem', 'allpage'],
-        // watch: {
-        //     "current": function (val, oldval) {
-        //         this.$dispatch('page-to', val);
-        //     }
-        // },
         computed: {
             pages: function () {
                 var pag = [];
                 console.info('allpage' + this.allpage);
                 console.info('current' + this.current);
                 console.info('sbowitem' + this.showitem);
-                if (this.current < this.showitem) { //如果当前的激活的项 小于要显示的条数
+                if (this.cur < this.showitem) { //如果当前的激活的项 小于要显示的条数
                     //总页数和要显示的条数那个大就显示多少条
                     var i = Math.min(this.showitem, this.allpage);
                     console.info(i);
@@ -64,7 +61,7 @@ window.onload = function () {
                         pag.unshift(i--);
                     }
                 } else { //当前页数大于显示页数了
-                    var middle = this.current - Math.floor(this.showitem / 2),//从哪里开始
+                    var middle = this.cur - Math.floor(this.showitem / 2),//从哪里开始
                         i = this.showitem;
                     if (middle > (this.allpage - this.showitem)) {
                         middle = (this.allpage - this.showitem) + 1
@@ -100,8 +97,6 @@ window.onload = function () {
             }
         }
     });
-
-
     vmlist.init();
 
 

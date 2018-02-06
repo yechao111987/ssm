@@ -15,7 +15,6 @@
 <div class="container">
     <div class="row clearfix">
         <div class="col-md-12 column">
-            <h1>PageName111111111111111111</h1>
             <div class="col-md-1 column">
                 <ul class="nav nav-tabs">
                     <li><a href="/index.html">Home</a></li>
@@ -57,19 +56,18 @@
                         </tr>
                     </table>
                     <div>
-                        <page :current="cur" :showitem="10" :allpage="resp"></page>
+                        <page :current="1" :showitem="10" :allpage="resp"></page>
                     </div>
                 </div>
                 <script type="text/x-template" id="page1">
                     <ul class="pagination">
-                        <li v-show="current != 1" @click="current-- && goto(current)"><a href="#">上一页</a></li>
+                        <li v-show="cur != 1" @click="cur-- && goto(cur)"><a href="#">上一页</a></li>
                         <li v-for="index in pages" @click="goto(index)" :class="{'active':false}"
                             :key="index">
                             <a href="#">{{index}}</a>
                         </li>
-                        <!--<li v-show="allpage != current && allpage != 0 " @click="current++ && goto(current++)"><a-->
-                                <!--href="#">下一页</a></li>-->
-                        <li>{{current}}</li>
+                        <li v-show="allpage != cur && allpage != 0 " @click="cur++ && goto(cur)"><a
+                                href="#">下一页</a></li>
                     </ul>
                 </script>
             </div>

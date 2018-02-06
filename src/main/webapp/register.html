@@ -11,25 +11,33 @@
           href="https://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
 </head>
 <body>
-<ul class="nav nav-tabs">
-    <li><a href="/index.html">Home</a></li>
-    <li class="active"><a href="/register.html">Register</a></li>
-    <li><a href="/customerlist.html">Customer</a></li>
-    <li><a href="#">VB.Net</a></li>
-    <li><a href="#">Java</a></li>
-    <li><a href="#">PHP</a></li>
-</ul>
-<p>注册客户</p>
-<div id='register'>
-    <input v-model="name" type="text" placeholder="用户名">
-    <br>
-    <input v-model="password" type="text" placeholder="用户密码">
-    <br>
-    <input v-model="phone" type="text" placeholder="电话号码">
-    <br>
-    <input v-model="address" type="text" placeholder="用户地址">
-    <br> <input type="button" @click="register()" value="点我新增客户">
-    <p>{{message}}</p>
-</div>
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <div class="col-md-1 column">
+                <ul class="nav nav-tabs">
+                    <li><a href="/index.html">Home</a></li>
+                    <li class="active"><a href="/register.html">Register</a></li>
+                    <li><a href="/customerlist.html">Customer</a></li>
+                    <li><a href="/customerSearch.html">CustomerSearch</a></li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-11 column">
+            <h3>注册客户</h3>
+            <div id='register'>
+                <input v-model="name" type="text" placeholder="用户名">
+                <br>
+                <input v-model="password" type="text" placeholder="用户密码">
+                <br>
+                <input v-model="phone" type="text" placeholder="电话号码">
+                <br>
+                <input v-model="address" type="text" placeholder="用户地址">
+                <br> <input type="button" @click="register()" value="点我新增客户">
+                <p>{{message}}</p>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

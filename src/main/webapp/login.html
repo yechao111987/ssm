@@ -12,19 +12,32 @@
 </head>
 </head>
 <body>
-<div id='login'>
-    <label for="name">登录名称</label>
-    <input v-model="name" type="text" placeholder="用户姓名" class="form-control">
-    <br>
-    <input v-model="password" type="password" placeholder="密码" class="form-control">
-    <br>
-    <p>{{message}}</p>
-    <br> <input type="button" @click="login()" value="登录" class="btn btn-primary">
-
-    <br><a href="/register.html">去注册用户</a>
-    <br><a href="/login?">Test</a>
+<div class="container">
+    <div id='login'>
+        <form role="form">
+            <div class="form-group">
+                <label for="name">登录名：</label>
+                <input v-model="name" type="text" placeholder="用户姓名" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="password">密码：</label>
+                <input v-model="password" type="password" placeholder="密码" class="form-control">
+            </div>
+            <p>{{message}}</p>
+            <div class="form-group">
+                <input type="button" @click="login()" value="登录" class="btn btn-primary">
+            </div>
+        </form>
+    </div>
+    <div>
+        <a href="/register.html">去注册用户</a>
+        <hr>
+        <a href="/login?">Test</a>
+    </div>
 </div>
+<hr>
 <div id="1212"></div>
+<hr>
 <form id="myform" name="myform" method="post" onsubmit="return sumbitTest();" action="RegisterAction.action">
     <table>
         <tr>
