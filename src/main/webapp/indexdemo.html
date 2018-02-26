@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>index Demo Page</title>
+    <script src="/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="indexdemo.js"></script>
+</head>
+<body>
+<div class="container" id="app">
+    <div class="row clearfix">
+        <div class="col-md-12">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="/indexdemo.html">Home</a></li>
+                <li>
+                    <router-link to="/indexdemo">Go to indexDemo</router-link>
+                </li>
+                <li><a href="/register.html">Register</a></li>
+                <li><a href="/customerlist.html">Customer</a></li>
+                <li><a href="/customerSearch.html">CustomerSearch</a></li>
+            </ul>
+        </div>
+        <div class="col-md-12"><br></div>
+        <div class="col-md-12 column">
+            <router-view></router-view>
+        </div>
+    </div>
+</div>
+<template id="temp1">
+    <div class="col-md-12 column">
+        <br>
+        <input v-model="address" type="text" placeholder="地址">
+        <br>
+        <input v-model="phone" type="text" placeholder="电话号码">
+        <br> <input type="button" @click="getPost()" value="点我新增客户">
+        <br><a href="/demo">去客户列表页面</a>
+    </div>
+</template>
+</body>
+</html>

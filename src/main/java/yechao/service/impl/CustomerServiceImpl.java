@@ -86,4 +86,15 @@ public class CustomerServiceImpl implements CustomerService {
         return pageForm;
     }
 
+    @Override
+    public Boolean updateCustomer(Customer customer) {
+        if (1 == customerdao.updateByPrimaryKey(customer)) {
+            log.info(customer.getId());
+            return true;
+        }
+        return false;
+
+
+    }
+
 }

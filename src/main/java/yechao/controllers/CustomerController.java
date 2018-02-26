@@ -222,10 +222,45 @@ public class CustomerController {
     }
 
 
-    @RequestMapping(value = "/add", method = RequestMethod.GET)
-    public ModelAndView toAddCustomerPage() {
-        ModelAndView modelAndView = new ModelAndView("test/add");
-        return modelAndView;
+    @RequestMapping(value = "/updateCustomer", method = RequestMethod.GET)
+    @ResponseBody
+    public Response<Boolean> toUpdateCustomer(@RequestParam("id") Integer id, @RequestParam("name") String name, @RequestParam("phone") String phone, @RequestParam("address") String address) {
+        Response<Boolean> response = new Response<>();
+        Customer customer = new Customer();
+        customer.setId(id);
+        customer.setAddress(address);
+        customer.setName(name);
+        customer.setPhone(phone);
+        log.info(customer.getId());
+        if (customerService.updateCustomer(customer)) {
+            response.setCode("0");
+            response.setMessage("更新成功");
+            response.setDataResult(true);
+        } else {
+            response.setCode("1");
+            response.setMessage("更新失败");
+            response.setDataResult(false);
+        }
+        return response;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "delete", method = RequestMethod.GET)
+    public Response<Boolean> toDelCustomer(@RequestParam("id") Integer id) {
+        Response<Boolean> response = new Response<>();
+        try {
+            customerService.deleteByid(id.intValue());
+            response.setCode("0");
+            response.setDataResult(true);
+            response.setMessage("删除客户成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.setCode("1");
+            response.setMessage("删除失败");
+            response.setDataResult(false);
+        }
+        return response;
+
     }
 
 

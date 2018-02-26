@@ -2,19 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <script src="https://cdn.bootcss.com/vue/2.2.2/vue.min.js"></script>
+    <title>Customer Search</title>
+    <script src="/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script
-            src="https://cdn.jsdelivr.net/vue.resource/1.0.3/vue-resource.min.js"></script>
     <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
-
-
+    <script src="customersearch.js"></script>
 </head>
 <body>
-<script src="customersearch.js"></script>
 <div class="container">
     <div class="row clearfix">
         <div class="col-md-12 column">
@@ -24,23 +20,22 @@
                     <li><a href="/register.html">Register</a></li>
                     <li><a href="/customerlist.html">Customer</a></li>
                     <li class="active"><a href="/customerSearch.html">CustomerSearch</a></li>
-
                 </ul>
             </div>
             <div class="col-md-11 column">
                 <div id='test'>
                     <h3>SearchPage</h3>
-                    <input v-model="mess" type="text" placeholder="请输入编号" class="form-control">
+                    <input v-model="mess" type="text" placeholder="请输入编号" class="form-control" required="required">
                     <br>
-                    <div class="alert alert-info">{{mess}}</div>
+                    <div class="alert alert-info">{{message}}</div>
                     <br> <input type="button" @click="getM()" value="点我查询客户信息" class="btn btn-primary">
-                    <div class="alert alert-info">{{item.message}}</div>
+                    <div class="alert alert-info">{{message}}</div>
                     <table class="table table-striped table-bordered table-hover table-responsive">
                         <caption>客户信息</caption>
                         <tr v-if="item.code === '777'">
                             <!--//{{item.message}}-->
                         </tr>
-                        <tr>
+                        <tr v-if="item.code === '0'">
                             <th>编号</th>
                             <th>姓名</th>
                             <th>手机号码</th>
@@ -48,8 +43,7 @@
                             <th>详细信息</th>
                             <th>operation</th>
                         </tr>
-                        </tr>
-                        <tr v-if="item.code === '0'">
+                        <tr v-if=" item.code==='0'">
                             <td>{{customer.id}}</td>
                             <td>{{customer.name}}</td>
                             <td>{{customer.phone}}</td>
@@ -64,21 +58,72 @@
                             </td>
                         </tr>
                         <!--模态框_编辑-->
-                        <div class="modal fade" id="myModal_edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                        <div class="modal fade" id="myModal_edit" tabindex="-1" role="dialog"
+                             aria-labelledby="myModalLabel"
                              aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                            &times;
+                                        </button>
+                                        <h4 class="modal-title" id="myModalLabel">客户编辑页面</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form role="form">
+                                            <div>
+                                                <label for="id">ID:</label>
+                                                <input id="cid" type="text" class="form-control"
+                                                       v-bind:value="customer.id" readonly="readonly">
+                                            </div>
+                                            <div>
+                                                <label for="name">name:</label>
+                                                <input id="cname" type="text" class="form-control"
+                                                       v-bind:value="customer.name">
+                                            </div>
+                                            <div>
+                                                <label for="phone">phone:</label>
+                                                <input id="cphone" type="text" class="form-control"
+                                                       v-bind:value="customer.phone">
+                                            </div>
+                                            <div>
+                                                <label for="address">address:</label>
+                                                <input type="text" class="form-control" v-bind:value="customer.address"
+                                                       id="caddress">
+                                            </div>
+                                        </form>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                                            </button>
+                                            <button type="button" class="btn btn-primary" v-on:click="updateCustomer()"
+                                                    data-dismiss="modal">
+                                                提交更改
+                                            </button>
+                                        </div>
+                                    </div><!-- /.modal-content -->
+                                </div><!-- /.modal -->
+                            </div>
+                        </div>
+                        <!--模态框_删除-->
+                        <div class="modal fade" id="myModal_del" tabindex="-1" role="dialog"
+                             aria-labelledby="myModalLabel"
+                             aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                            &times;
                                         </button>
                                         <h4 class="modal-title" id="myModalLabel">模态框（Modal）标题</h4>
                                     </div>
-                                    <div class="modal-body"><p>姓名：</p>
-                                        <input type="text" placeholder="{{customer.id}}}" v-model="customer.id">
-                                        <p>{{customer.id}}</p></div>
+                                    <div class="modal-body">确定要删除当前客户吗</div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                                        <button type="button" class="btn btn-primary">提交更改</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">否
+                                        </button>
+                                        <button type="button" class="btn btn-primary" v-on:click="deleteCustomer()"
+                                                data-dismiss="modal">
+                                            是
+                                        </button>
                                     </div>
                                 </div><!-- /.modal-content -->
                             </div><!-- /.modal -->
@@ -88,23 +133,5 @@
             </div>
 
 
-            <!--模态框_删除-->
-            <div class="modal fade" id="myModal_del" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-                 aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;
-                            </button>
-                            <h4 class="modal-title" id="myModalLabel">模态框（Modal）标题</h4>
-                        </div>
-                        <div class="modal-body">在这里添加一些文本</div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                            <button type="button" class="btn btn-primary">提交更改</button>
-                        </div>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal -->
-            </div>
 </body>
 </html>

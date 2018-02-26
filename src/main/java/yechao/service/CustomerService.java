@@ -17,4 +17,6 @@ public interface CustomerService {
 
     public PageForm listByPage(int currentPage, int pageSize);
 
+    public Boolean updateCustomer(Customer customer);
+
 }
