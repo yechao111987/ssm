@@ -8,6 +8,8 @@ public class PageForm<T> {
     private Integer pageNum;
     private Integer pageSize;
     private Integer totalPage;
+    private Integer totalCount;
+    private List<T> list;
 
     public Integer getPageNum() {
         return pageNum;
@@ -49,8 +51,7 @@ public class PageForm<T> {
         this.list = list;
     }
 
-    private Integer totalCount;
-    private List<T> list;
+
 
 
 }
