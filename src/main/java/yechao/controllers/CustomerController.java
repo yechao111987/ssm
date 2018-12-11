@@ -232,6 +232,8 @@ public class CustomerController {
         customer.setAddress(address);
         customer.setName(name);
         customer.setPhone(phone);
+        System.out.println("yechao1");
+        System.out.println("yechao1_1");
         log.info(customer.getId());
         if (customerService.updateCustomer(customer)) {
             response.setCode("0");
