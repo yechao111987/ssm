@@ -216,7 +216,6 @@ public class CustomerController {
         modelMap.put("yechao", "right");
         // modelAndView.addObject("yechao", "test");
         modelAndView.addAllObjects(modelMap);
-
         return modelAndView;
 
     }
@@ -238,7 +237,6 @@ public class CustomerController {
         if (customerService.updateCustomer(customer)) {
             response.setCode("0");
 //            response.setMessage("更新成功");
-            response.setDataResult(true);
         } else {
             response.setCode("1");
             response.setMessage("更新失败");
