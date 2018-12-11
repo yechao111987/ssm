@@ -227,6 +227,7 @@ public class CustomerController {
     public Response<Boolean> toUpdateCustomer(@RequestParam("id") Integer id, @RequestParam("name") String name, @RequestParam("phone") String phone, @RequestParam("address") String address) {
         Response<Boolean> response = new Response<>();
         Customer customer = new Customer();
+        System.out.println("yechao");
         customer.setId(id);
         customer.setAddress(address);
         customer.setName(name);
