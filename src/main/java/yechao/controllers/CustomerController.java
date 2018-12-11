@@ -33,6 +33,8 @@ import yechao.yechaoUtil.StringUtil;
 @RequestMapping("/customer")
 public class CustomerController {
 
+    private final static String INFO = "yechao";
+
     @Resource
     private CustomerService customerService;
     @Resource
@@ -60,12 +62,10 @@ public class CustomerController {
     public String toTest() {
         ModelAndView modelAndView = new ModelAndView("test/list");
         Map<String, Object> modelMap = new HashMap<String, Object>();
-        modelMap.put("yechao", "right");
         // modelAndView.addObject("yechao", "test");
         modelAndView.addAllObjects(modelMap);
         String jsonString = JSON.toJSONString(modelMap);
         System.out.println(jsonString);
-
         return jsonString;
 
     }
