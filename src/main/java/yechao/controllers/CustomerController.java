@@ -237,7 +237,7 @@ public class CustomerController {
         log.info(customer.getId());
         if (customerService.updateCustomer(customer)) {
             response.setCode("0");
-            response.setMessage("更新成功");
+//            response.setMessage("更新成功");
             response.setDataResult(true);
         } else {
             response.setCode("1");
